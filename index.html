@@ -1,1 +1,518 @@
-<h1>hello world!</h1>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온양고 25회 - 같이가볼과</title>
+    <!-- 폰트: 칠판 글씨 느낌의 '동동', 제목용 '주아', 본문용 '노토산스' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. 기본 설정 및 변수 --- */
+        :root {
+            --school-green: #2F5D62; /* 칠판색 */
+            --chalk-white: #FDFBF7;   /* 분필색 */
+            --wood-brown: #8B5E3C;    /* 교탁/책상색 */
+            --accent-yellow: #FFD523; /* 강조색 (형광펜) */
+            --bg-color: #F0F2F5;
+            --text-color: #333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        ul { list-style: none; }
+
+        /* 폰트 유틸리티 */
+        .font-chalk { font-family: 'Dongle', sans-serif; line-height: 1.2; }
+        .font-title { font-family: 'Jua', sans-serif; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- 2. 헤더 (칠판 디자인) --- */
+        header {
+            background-color: var(--school-green);
+            color: var(--chalk-white);
+            padding: 50px 0 30px;
+            text-align: center;
+            border-bottom: 15px solid var(--wood-brown);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        /* 칠판 지우개 가루 효과 */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .header-icon { font-size: 3rem; margin-bottom: 10px; display: inline-block; animation: bounce 2s infinite; }
+        .main-title { 
+            font-family: 'Jua', sans-serif; 
+            font-size: 3.5rem; 
+            margin-bottom: 5px; 
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+        }
+        .sub-title { 
+            font-family: 'Dongle', sans-serif; 
+            font-size: 2.2rem; 
+            opacity: 0.9; 
+            margin-top: -10px;
+        }
+
+        /* 네비게이션 */
+        nav { margin-top: 30px; position: relative; z-index: 10; }
+        nav ul { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        nav a {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.3s;
+        }
+        nav a:hover { 
+            background: var(--accent-yellow); 
+            color: #333; 
+            transform: translateY(-3px); 
+            font-weight: bold;
+        }
+
+        /* --- 3. 메인 Callout (환영사) --- */
+        .callout-wrapper {
+            margin-top: -30px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 5;
+        }
+        .callout {
+            background: white;
+            border: 3px solid var(--school-green);
+            border-radius: 15px;
+            padding: 40px 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-image: linear-gradient(#f9f9f9 2px, transparent 2px), linear-gradient(90deg, #f9f9f9 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        .callout h2 { 
+            font-family: 'Jua', sans-serif; 
+            font-size: 2rem; 
+            color: #d32f2f; 
+            margin-bottom: 20px; 
+        }
+        .callout p { font-size: 1.1rem; margin-bottom: 20px; color: #444; }
+        .callout-sign { 
+            font-family: 'Dongle', sans-serif; 
+            font-size: 2rem; 
+            color: var(--school-green); 
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* 섹션 공통 */
+        section { padding: 60px 0; }
+        .section-header { 
+            text-align: center; margin-bottom: 40px; 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .section-header h2 { font-family: 'Jua', sans-serif; font-size: 2.2rem; color: var(--school-green); }
+        .section-icon { font-size: 2rem; }
+
+        /* --- 4. 교무실 (프로필) --- */
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--school-green);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        /* 명찰 스타일 */
+        .name-badge {
+            display: inline-block;
+            background: white;
+            border: 2px solid #333;
+            padding: 5px 15px;
+            border-radius: 4px; /* 명찰 모양 */
+            font-family: 'Jua', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+        }
+        
+        .profile-img { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .role-text { font-weight: bold; color: var(--school-green); font-size: 1rem; margin-bottom: 5px; }
+        .desc-text { color: #666; font-size: 0.95rem; margin-bottom: 15px; height: 50px; }
+        .quote-text { 
+            font-family: 'Dongle', sans-serif; 
+            font-size: 1.5rem; 
+            color: var(--wood-brown); 
+            border-top: 1px dashed #ddd; 
+            padding-top: 10px; 
+        }
+
+        /* --- 5. 가정통신문 (공지) --- */
+        .notice-board {
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #ccc;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.05);
+            position: relative;
+        }
+        /* 클립 모양 */
+        .notice-board::before {
+            content: '📎';
+            position: absolute;
+            top: -20px; left: 50%; transform: translateX(-50%);
+            font-size: 3rem;
+        }
+        
+        .rule-list li { 
+            margin-bottom: 15px; 
+            font-size: 1.1rem; 
+            padding-left: 20px; 
+            position: relative; 
+        }
+        .rule-list li::before {
+            content: '✔';
+            color: var(--school-green);
+            position: absolute; left: 0; top: 2px;
+            font-weight: bold;
+        }
+        .highlight { background: linear-gradient(to top, #fff176 50%, transparent 50%); }
+
+        /* --- 6. 수학여행 (일정) --- */
+        .trip-wrapper {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .trip-img-area {
+            flex: 1;
+            min-width: 300px;
+            background: #eee;
+            /* 속초 느낌의 무료 이미지 */
+            background-image: url('https://images.unsplash.com/photo-1596443686812-2f45229eebc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 350px;
+            position: relative;
+        }
+        .d-day-badge {
+            position: absolute;
+            top: 20px; left: 20px;
+            background: #d32f2f;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: 'Jua', sans-serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .trip-content { flex: 1; padding: 40px; min-width: 300px; display: flex; flex-direction: column; justify-content: center; }
+        .trip-title { font-family: 'Jua', sans-serif; font-size: 2rem; margin-bottom: 20px; color: #333; }
+        .trip-detail { margin-bottom: 30px; font-size: 1.1rem; color: #555; }
+        
+        .vote-buttons { display: flex; gap: 10px; margin-top: auto; }
+        .btn-vote {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+        .btn-vote:active { transform: translateY(4px); box-shadow: none; }
+        
+        .btn-yes { background: var(--school-green); color: white; }
+        .btn-maybe { background: var(--accent-yellow); color: #333; }
+        .btn-no { background: #e0e0e0; color: #666; }
+
+        /* --- 7. 행정실 (회비) --- */
+        .finance-card {
+            background: var(--school-green);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .finance-card::after {
+            content: '₩';
+            position: absolute;
+            right: -20px; bottom: -50px;
+            font-size: 15rem;
+            opacity: 0.1;
+            font-family: serif;
+        }
+        .balance-label { font-size: 1.2rem; opacity: 0.9; margin-bottom: 5px; }
+        .balance-amount { font-family: 'Jua', sans-serif; font-size: 3.5rem; color: var(--accent-yellow); margin-bottom: 20px; letter-spacing: 2px; }
+        .bank-info { 
+            background: rgba(0,0,0,0.2); 
+            display: inline-block; 
+            padding: 10px 30px; 
+            border-radius: 30px; 
+            font-size: 1.2rem; 
+            margin-bottom: 30px;
+        }
+        .btn-excel {
+            background: white;
+            color: var(--school-green);
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+        .btn-excel:hover {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #888;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+            font-size: 0.9rem;
+        }
+
+        /* 애니메이션 */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .sub-title { font-size: 1.8rem; }
+            .trip-wrapper { flex-direction: column; }
+            .trip-img-area { min-height: 250px; }
+            .vote-buttons { flex-direction: column; }
+            .balance-amount { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <div class="header-icon">🚌</div>
+            <h1 class="main-title">온양고 제3계열 [같이가볼과]</h1>
+            <p class="sub-title font-chalk">"야자 끝났다. 이제 짐 싸라!"</p>
+            
+            <nav>
+                <ul>
+                    <li><a href="#profiles">① 교무실 (운영진)</a></li>
+                    <li><a href="#rules">② 가정통신문 (공지)</a></li>
+                    <li><a href="#trip">③ 수학여행 (일정)</a></li>
+                    <li><a href="#finance">④ 행정실 (회비)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 Callout -->
+    <div class="container callout-wrapper">
+        <div class="callout">
+            <h2>📢 온양고 25회 친구들아, 반갑다!</h2>
+            <p>
+                문과 감성과 이과 두뇌를 합쳐 떠나는 온양고 동창들의 여행 프로젝트.<br>
+                성적표는 찢어버리고, 오직 <strong>추억</strong>과 <strong>맛집</strong>만 남기자.
+            </p>
+            <p class="callout-sign">- 담임: 미사회 일동 -</p>
+        </div>
+    </div>
+
+    <!-- 1. 교무실 (프로필) -->
+    <section id="profiles">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">👨‍🏫</span>
+                <h2>교무실 (미사회 4인방)</h2>
+            </div>
+            
+            <div class="profile-grid">
+                <!-- 멤버 1: 이재환 -->
+                <div class="profile-card">
+                    <span class="profile-img">👑</span>
+                    <div class="name-badge">이재환</div>
+                    <p class="role-text">반장 / 기획 총괄</p>
+                    <p class="desc-text">"야, 이번 코스 내가 짰다. 믿고 따라와라."</p>
+                    <p class="quote-text">#리더십 #추진력 #대장</p>
+                </div>
+
+                <!-- 멤버 2: 최석인 (선도부장으로 변경) -->
+                <div class="profile-card">
+                    <span class="profile-img">🚙</span>
+                    <div class="name-badge">최석인</div>
+                    <p class="role-text">선도부장 / 섭외&운전</p>
+                    <p class="desc-text">"나오면 재밌다니까? 내가 다 태우러 간다."</p>
+                    <p class="quote-text">#베스트드라이버 #행동대장</p>
+                </div>
+
+                <!-- 멤버 3: 조연묵 -->
+                <div class="profile-card">
+                    <span class="profile-img">🎤</span>
+                    <div class="name-badge">조연묵</div>
+                    <p class="role-text">오락부장 / 분위기</p>
+                    <p class="desc-text">"오늘 밤 잠잘 생각 마라. 3차까지 간다."</p>
+                    <p class="quote-text">#핵인싸 #노래방 #텐션업</p>
+                </div>
+
+                <!-- 멤버 4: 권희대 (총무로 변경) -->
+                <div class="profile-card">
+                    <span class="profile-img">🧮</span>
+                    <div class="name-badge">권희대</div>
+                    <p class="role-text">총무 / 회비 관리</p>
+                    <p class="desc-text">"영수증 없으면 정산 없다. 10원도 맞춘다."</p>
+                    <p class="quote-text">#인간계산기 #꼼꼼함 #장부</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 가정통신문 (공지) -->
+    <section id="rules" style="background-color: #fffbf0;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">📜</span>
+                <h2>가정통신문 (필독 사항)</h2>
+            </div>
+            
+            <div class="notice-board">
+                <ul class="rule-list">
+                    <li><strong>제1조(참석):</strong> 묻지도 따지지도 않고 참석하는 것이 원칙이다. (경조사만 인정)</li>
+                    <li><strong>제2조(회비):</strong> 이과 출신 총무(권희대)가 엑셀 돌리니까 딴지 금지.</li>
+                    <li><strong>제3조(평화):</strong> 술 먹고 정치/종교 이야기 시 <span class="highlight">강제 귀가 조치</span> 함.</li>
+                    <li><strong>제4조(준비):</strong> 몸은 가볍게, 마음은 즐겁게!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 수학여행 (일정) -->
+    <section id="trip">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">✈️</span>
+                <h2>2026 춘계 해외학습 안내</h2>
+            </div>
+            
+            <div class="trip-wrapper">
+                <div class="trip-img-area">
+                    <div class="d-day-badge">D-42</div>
+                </div>
+                <div class="trip-content">
+                    <h3 class="trip-title">베트남 하노이 & 하롱베이 (3박 5일)</h3>
+                    <div class="trip-detail">
+                        <p>📍 <strong>일시:</strong> 2026년 3월 13일(금) 출발 (3박 5일)</p>
+                        <p>📍 <strong>집결:</strong> 인천공항 제1터미널 (시간 미정)</p>
+                        <p>📍 <strong>목표:</strong> 하롱베이 선상 파티 + 1일 3쌀국수</p>
+                    </div>
+                    
+                    <p style="margin-bottom: 15px; font-weight: bold;">참석 여부를 눌러주세요:</p>
+                    <div class="vote-buttons">
+                        <button class="btn-vote btn-yes" onclick="vote('yes')">🙋‍♂️ 무조건 참석</button>
+                        <button class="btn-vote btn-maybe" onclick="vote('maybe')">🤔 여권 찾는중</button>
+                        <button class="btn-vote btn-no" onclick="vote('no')">🙅‍♂️ 사유서 제출</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 행정실 (회비) -->
+    <section id="finance">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">💸</span>
+                <h2>행정실 (회비 현황)</h2>
+            </div>
+            
+            <div class="finance-card">
+                <p class="balance-label">현재 모임 통장 잔액</p>
+                <div class="balance-amount">₩ 1,500,000</div>
+                <div class="bank-info">
+                    농협 123-4567-8901-23 (예금주: 권희대)
+                </div>
+                <br>
+                <a href="#" class="btn-excel" onclick="alert('엑셀 파일 연결이 필요합니다! (구글 스프레드시트 링크를 여기에 넣으세요)')">
+                    📊 회비 장부 엑셀 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 온양고등학교 25회 여행모임 [같이가볼과]</p>
+            <p>Developed by 미사회 (이재환, 최석인, 조연묵, 권희대)</p>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 기능 -->
+    <script>
+        // 1. 투표 버튼 기능
+        function vote(type) {
+            let msg = "";
+            if(type === 'yes') {
+                msg = "🎉 환영합니다! 명단에 등록되었습니다.\n(준비물: 튼튼한 간)";
+            } else if(type === 'maybe') {
+                msg = "🙏 긍정적인 검토 부탁드립니다.\n(허락 못 받으면 우리가 전화해줌)";
+            } else {
+                msg = "😭 아쉽네요.. 사유서는 총무에게 제출해주세요.";
+            }
+            alert(msg);
+        }
+
+        // 2. 부드러운 스크롤 이동
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
